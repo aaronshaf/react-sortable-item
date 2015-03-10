@@ -1,7 +1,7 @@
 import React from 'react'
 
 // In your code:
-// import SortableListItem from 'react-sortable-list-item'
+// import SortableListItem from 'react-sortable-item'
 
 import findIndex from 'lodash-node/modern/array/findIndex'
 import range from 'lodash-node/modern/utility/range'
@@ -75,7 +75,7 @@ var ExampleSortableList = React.createClass({
 function update() {
   React.render(
     <div>
-      <h1>react-sortable-list</h1>
+      <h1>react-sortable-item</h1>
       <ExampleSortableList />
     </div>,
     document.getElementById('examples')
