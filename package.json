@@ -1,6 +1,6 @@
 {
   "name": "react-sortable-item",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reorder elements in a list. Uses the native HTML5 Drag and Drop API.",
   "main": "index.es5.js",
   "scripts": {
