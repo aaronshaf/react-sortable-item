@@ -6,6 +6,14 @@ See [example](http://aaronshaf.github.io/react-sortable-item/).
 
 This library is quite different from others in that treats the reindexing strategy as an implementation detail.
 
+## Install
+
+```base
+npm install react-sortable-item
+```
+
+## Example
+
 ```javascript
 var ExampleSortableList = React.createClass({
   handleDrop: function(dropPath, position, event) {},
