@@ -97,15 +97,17 @@
 	  },
 
 	  render: function render() {
-	    var list = modules.map((function (data) {
+	    var _this = this;
+
+	    var list = modules.map(function (data) {
 	      return React.createElement(
 	        SortableItem,
 	        {
 	          key: data.id,
 	          type: data.type,
 	          data: data.path,
-	          handleDrop: this.handleDrop,
-	          handleAcceptTest: this.handleAcceptTest },
+	          handleDrop: _this.handleDrop,
+	          handleAcceptTest: _this.handleAcceptTest },
 	        React.createElement(
 	          "li",
 	          null,
@@ -116,7 +118,7 @@
 	          )
 	        )
 	      );
-	    }).bind(this));
+	    });
 	    return React.createElement(
 	      "div",
 	      null,
@@ -238,7 +240,6 @@
 	    });
 
 	    return cloneWithProps(this.props.children, {
-	      // key=""
 	      ref: "item",
 	      draggable: "true",
 	      className: classes,

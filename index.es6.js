@@ -74,7 +74,6 @@ export default React.createClass({
     });
 
     return cloneWithProps(this.props.children, {
-      // key=""
       ref: "item",
       draggable: "true",
       className: classes,

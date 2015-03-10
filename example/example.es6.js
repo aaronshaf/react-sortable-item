@@ -11,7 +11,7 @@ Array.prototype.move = function(from, to) {
   this.splice(to, 0, this.splice(from, 1)[0])
 }
 
-var modules = range(10).map(function(i) {
+var modules = range(10).map((i) => {
   return {
     id: i,
     label: `Module ${i}`,
@@ -21,7 +21,7 @@ var modules = range(10).map(function(i) {
 })
 
 var ExampleSortableList = React.createClass({
-  handleDrop: function(dropPath, position, event) {
+  handleDrop(dropPath, position, event) {
     var data = event.dataTransfer.getData('text/plain')
     var origin = findIndex(modules, module => data === module.path)
     var destination = findIndex(modules, module => dropPath === module.path)
@@ -41,13 +41,13 @@ var ExampleSortableList = React.createClass({
     */
   },
 
-  handleAcceptTest: function(event) {
+  handleAcceptTest(event) {
     // var isLink = event.dataTransfer.types.contains("text/uri-list");
     return true
   },
 
   render: function() {
-    var list = modules.map(function(data) {
+    var list = modules.map((data) => {
       return (
         <SortableItem
             key={data.id}
@@ -62,7 +62,7 @@ var ExampleSortableList = React.createClass({
           </li>
         </SortableItem>
       );
-    }.bind(this))
+    })
     return (
       <div>
         <ul>
