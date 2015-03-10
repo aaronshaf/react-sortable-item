@@ -67,7 +67,8 @@
 	  return {
 	    id: i,
 	    label: "Module " + i,
-	    path: "module." + i
+	    path: "module." + i,
+	    type: "text/plain"
 	  };
 	});
 
@@ -101,7 +102,7 @@
 	        SortableItem,
 	        {
 	          key: data.id,
-	          type: "text/plain",
+	          type: data.type,
 	          data: data.path,
 	          handleDrop: this.handleDrop,
 	          handleAcceptTest: this.handleAcceptTest },
@@ -135,7 +136,7 @@
 	    React.createElement(
 	      "h1",
 	      null,
-	      "react-sortable-list"
+	      "react-sortable-item"
 	    ),
 	    React.createElement(ExampleSortableList, null)
 	  ), document.getElementById("examples"));

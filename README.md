@@ -1,4 +1,4 @@
-# react-sortable-list-item
+# react-sortable-item
 
 Reorder elements in a list. Uses the native HTML5 Drag and Drop API.
 

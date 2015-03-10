@@ -76,7 +76,7 @@ var ExampleSortableList = React.createClass({
 function update() {
   React.render(
     <div>
-      <h1>react-sortable-list</h1>
+      <h1>react-sortable-item</h1>
       <ExampleSortableList />
     </div>,
     document.getElementById('examples')
