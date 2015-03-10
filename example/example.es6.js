@@ -8,25 +8,36 @@ import findIndex from 'lodash-node/modern/array/findIndex'
 import range from 'lodash-node/modern/utility/range'
 
 Array.prototype.move = function(from, to) {
-  this.splice(to, 0, this.splice(from, 1)[0]);
-};
+  this.splice(to, 0, this.splice(from, 1)[0])
+}
 
 var modules = range(10).map(function(i) {
   return {
     id: i,
     label: `Module ${i}`,
     path: 'module.' + i
-  };
-});
+  }
+})
 
 var ExampleSortableList = React.createClass({
   handleDrop: function(dropPath, position, event) {
     var data = event.dataTransfer.getData('text/plain')
     var origin = findIndex(modules, module => data === module.path)
     var destination = findIndex(modules, module => dropPath === module.path)
-    console.log({data, origin, destination})
-    modules.move(origin, destination + position)
+    if(destination > origin) {
+      modules.move(origin, destination + position - 1)
+    } else {
+      modules.move(origin, destination + position)
+    }
     update()
+
+    /*
+    console.log({
+      origin,
+      destination,
+      position
+    })
+    */
   },
 
   handleAcceptTest: function(event) {
@@ -44,7 +55,7 @@ var ExampleSortableList = React.createClass({
             handleDrop={this.handleDrop}
             handleAcceptTest={this.handleAcceptTest}>
           <li>
-            <div className="inner">
+            <div className="li-inner">
               {data.label}
             </div>
           </li>
@@ -53,7 +64,6 @@ var ExampleSortableList = React.createClass({
     }.bind(this))
     return (
       <div>
-        <h2>Sortable table</h2>
         <ul>
           {list}
         </ul>
@@ -65,7 +75,7 @@ var ExampleSortableList = React.createClass({
 function update() {
   React.render(
     <div>
-      <h1>react-sortable-item</h1>
+      <h1>react-sortable-list</h1>
       <ExampleSortableList />
     </div>,
     document.getElementById('examples')

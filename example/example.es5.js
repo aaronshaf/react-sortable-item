@@ -82,8 +82,11 @@
 	    var destination = findIndex(modules, function (module) {
 	      return dropPath === module.path;
 	    });
-	    console.log({ data: data, origin: origin, destination: destination });
-	    modules.move(origin, destination + position);
+	    if (destination > origin) {
+	      modules.move(origin, destination + position - 1);
+	    } else {
+	      modules.move(origin, destination + position);
+	    }
 	    update();
 	  },
 
@@ -107,7 +110,7 @@
 	          null,
 	          React.createElement(
 	            "div",
-	            { className: "inner" },
+	            { className: "li-inner" },
 	            data.label
 	          )
 	        )
@@ -116,11 +119,6 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(
-	        "h2",
-	        null,
-	        "Sortable table"
-	      ),
 	      React.createElement(
 	        "ul",
 	        null,
@@ -137,12 +135,19 @@
 	    React.createElement(
 	      "h1",
 	      null,
-	      "react-sortable-item"
+	      "react-sortable-list"
 	    ),
 	    React.createElement(ExampleSortableList, null)
 	  ), document.getElementById("examples"));
 	}
 	update();
+	/*
+	console.log({
+	  origin,
+	  destination,
+	  position
+	})
+	*/
 
 /***/ },
 /* 1 */
@@ -163,6 +168,7 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
+	      dragging: false,
 	      hover: false,
 	      isOverSelf: false,
 	      hoverAbove: false
@@ -172,17 +178,12 @@
 	  handleDragStart: function handleDragStart(event) {
 	    event.dataTransfer.setData("text/plain", this.props.data);
 	    itemBeingDragged = this.refs.item.getDOMNode();
+	    this.setState({ dragging: true });
 	  },
 
 	  handleDragOver: function handleDragOver(event) {
 	    var isOverSelf = this.refs.item.getDOMNode() === itemBeingDragged;
-	    console.log(itemBeingDragged.style);
 	    var isOverTopHalf = event.clientY < event.target.offsetTop + event.target.offsetHeight / 2;
-	    console.log({
-	      clientY: event.clientY,
-	      offsetTop: event.target.offsetTop,
-	      offsetHeight: event.target.offsetHeight
-	    });
 
 	    this.setState({
 	      hover: true,
@@ -200,11 +201,9 @@
 	    }event.preventDefault();
 	  },
 
-	  /*
-	  handleDragEnter: function(event) {
-	    event.preventDefault();
+	  handleDragEnd: function handleDragEnd(event) {
+	    this.setState({ dragging: false });
 	  },
-	  */
 
 	  handleDragLeave: function handleDragLeave(event) {
 	    this.setState({
@@ -231,9 +230,10 @@
 	  render: function render() {
 	    var cx = React.addons.classSet;
 	    var classes = cx({
+	      dragging: this.state.dragging,
 	      hover: this.state.hover,
-	      "hover-below": !this.state.hoverAbove,
-	      "hover-above": this.state.hoverAbove
+	      "hover-above": this.state.hoverAbove,
+	      "hover-below": !this.state.hoverAbove
 	    });
 
 	    return cloneWithProps(this.props.children, {
@@ -245,6 +245,7 @@
 	      onDragOver: this.handleDragOver,
 	      onDragEnter: this.handleDragEnter,
 	      onDragLeave: this.handleDragLeave,
+	      onDragEnd: this.handleDragEnd,
 	      onDrop: this.handleDrop
 	    });
 	  }

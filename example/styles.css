@@ -2,16 +2,26 @@ li {
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
   cursor: move;
+  margin-bottom: -2px;
+  margin-top: -2px;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
 }
 
-li:active {
-  background-color: #dfdfdf;
+.li-inner {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.dragging {
+  opacity: 0.3;
+  transition: none;
 }
 
 .hover.hover-above {
-  border-top: 2px solid red;
+  border-top: 2px solid #ddd;
 }
 
 .hover.hover-below {
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #ddd;
 }

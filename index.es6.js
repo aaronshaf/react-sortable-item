@@ -6,6 +6,7 @@ var itemBeingDragged
 export default React.createClass({
   getInitialState() {
     return {
+      dragging: false,
       hover: false,
       isOverSelf: false,
       hoverAbove: false
@@ -13,19 +14,14 @@ export default React.createClass({
   },
 
   handleDragStart(event) {
-    event.dataTransfer.setData('text/plain', this.props.data);
-    itemBeingDragged = this.refs.item.getDOMNode();
+    event.dataTransfer.setData('text/plain', this.props.data)
+    itemBeingDragged = this.refs.item.getDOMNode()
+    this.setState({dragging: true})
   },
 
   handleDragOver(event) {
     var isOverSelf = this.refs.item.getDOMNode() === itemBeingDragged
-    console.log(itemBeingDragged.style)
     var isOverTopHalf = event.clientY < (event.target.offsetTop + (event.target.offsetHeight / 2))
-    console.log({
-      clientY: event.clientY,
-      offsetTop: event.target.offsetTop,
-      offsetHeight: event.target.offsetHeight
-    })
 
     this.setState({
       hover: true,
@@ -42,22 +38,20 @@ export default React.createClass({
     event.preventDefault()
   },
 
-  /*
-  handleDragEnter: function(event) {
-    event.preventDefault();
+  handleDragEnd(event) {
+    this.setState({dragging: false})
   },
-  */
 
   handleDragLeave(event) {
     this.setState({
       hover: false
     });
-    event.preventDefault();
+    event.preventDefault()
   },
 
   handleDrop(event) {
-    event.stopPropagation();
-    event.preventDefault();
+    event.stopPropagation()
+    event.preventDefault()
 
     this.setState({
       hover: false
@@ -73,9 +67,10 @@ export default React.createClass({
   render() {
     var cx = React.addons.classSet;
     var classes = cx({
+      'dragging': this.state.dragging,
       'hover': this.state.hover,
-      'hover-below': !this.state.hoverAbove,
-      'hover-above': this.state.hoverAbove
+      'hover-above': this.state.hoverAbove,
+      'hover-below': !this.state.hoverAbove
     });
 
     return cloneWithProps(this.props.children, {
@@ -87,6 +82,7 @@ export default React.createClass({
       onDragOver: this.handleDragOver,
       onDragEnter: this.handleDragEnter,
       onDragLeave: this.handleDragLeave,
+      onDragEnd: this.handleDragEnd,
       onDrop: this.handleDrop
     })
   }
