@@ -4,7 +4,7 @@ Reorder elements in a list. Uses the native HTML5 Drag and Drop API.
 
 See [example](http://aaronshaf.github.io/react-sortable-item/).
 
-This library is quite different from others in that treats the reindexing strategy as an implementation detail.
+This library is quite different from other react-sortable libraries in that it treats the reindexing strategy as an implementation detail.
 
 ## Install
 
