@@ -1,29 +1,9 @@
 {
-  "name": "react-sortable-list-item",
-  "version": "0.0.1",
-  "description": "Reorder elements in a list. Uses the native HTML5 Drag and Drop API.",
-  "main": "index.es5.js",
-  "scripts": {
-    "babel": "babel index.es6.js --out-file index.es5.js"
-  },
-  "dependencies": {
-    "react": "^0.12.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aaronshaf/react-sortable-list.git"
-  },
-  "contributors": [
-    "Aaron Shafovaloff <aaronshaf@gmail.com>"
-  ],
-  "license": "MIT",
-  "peerDependencies": {
-    "react": "^0.12.x || >=0.13.0-beta.1"
-  },
   "devDependencies": {
     "babel": "^4.7.4",
     "babel-loader": "^4.1.0",
     "lodash-node": "^3.5.0",
+    "react": "^0.12.2",
     "webpack": "^1.7.2"
   }
 }

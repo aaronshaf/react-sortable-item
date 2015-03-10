@@ -1,8 +1,7 @@
 import React from 'react'
 
 // In your code:
-// import SortableListItem from 'react-sortable-item'
-import SortableItem from '../index.es6'
+// import SortableListItem from 'react-sortable-list-item'
 
 import findIndex from 'lodash-node/modern/array/findIndex'
 import range from 'lodash-node/modern/utility/range'

@@ -2,7 +2,7 @@ var path = require('path')
 
 module.exports = {
   entry: {
-    'example/example.es5': './example/example.es6'
+    'example.es5': './example.es6'
   },
 
   output: {
