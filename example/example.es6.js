@@ -15,7 +15,8 @@ var modules = range(10).map(function(i) {
   return {
     id: i,
     label: `Module ${i}`,
-    path: 'module.' + i
+    path: 'module.' + i,
+    type: "text/plain"
   }
 })
 
@@ -50,7 +51,7 @@ var ExampleSortableList = React.createClass({
       return (
         <SortableItem
             key={data.id}
-            type="text/plain"
+            type={data.type}
             data={data.path}
             handleDrop={this.handleDrop}
             handleAcceptTest={this.handleAcceptTest}>
@@ -70,7 +71,7 @@ var ExampleSortableList = React.createClass({
       </div>
     );
   }
-});
+})
 
 function update() {
   React.render(
