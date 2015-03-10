@@ -37,7 +37,7 @@ var ExampleSortableList = React.createClass({
             </div>
           </li>
         </SortableItem>
-      );
+      )
     }.bind(this))
     return (
       <ul>
