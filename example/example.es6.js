@@ -1,0 +1,74 @@
+import React from 'react'
+
+// In your code:
+// import SortableListItem from 'react-sortable-item'
+import SortableItem from '../index.es6'
+
+import findIndex from 'lodash-node/modern/array/findIndex'
+import range from 'lodash-node/modern/utility/range'
+
+Array.prototype.move = function(from, to) {
+  this.splice(to, 0, this.splice(from, 1)[0]);
+};
+
+var modules = range(10).map(function(i) {
+  return {
+    id: i,
+    label: `Module ${i}`,
+    path: 'module.' + i
+  };
+});
+
+var ExampleSortableList = React.createClass({
+  handleDrop: function(dropPath, position, event) {
+    var data = event.dataTransfer.getData('text/plain')
+    var origin = findIndex(modules, module => data === module.path)
+    var destination = findIndex(modules, module => dropPath === module.path)
+    console.log({data, origin, destination})
+    modules.move(origin, destination + position)
+    update()
+  },
+
+  handleAcceptTest: function(event) {
+    // var isLink = event.dataTransfer.types.contains("text/uri-list");
+    return true
+  },
+
+  render: function() {
+    var list = modules.map(function(data) {
+      return (
+        <SortableItem
+            key={data.id}
+            type="text/plain"
+            data={data.path}
+            handleDrop={this.handleDrop}
+            handleAcceptTest={this.handleAcceptTest}>
+          <li>
+            <div className="inner">
+              {data.label}
+            </div>
+          </li>
+        </SortableItem>
+      );
+    }.bind(this))
+    return (
+      <div>
+        <h2>Sortable table</h2>
+        <ul>
+          {list}
+        </ul>
+      </div>
+    );
+  }
+});
+
+function update() {
+  React.render(
+    <div>
+      <h1>react-sortable-item</h1>
+      <ExampleSortableList />
+    </div>,
+    document.getElementById('examples')
+  );
+}
+update();

@@ -1,0 +1,17 @@
+li {
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  cursor: move;
+}
+
+li:active {
+  background-color: #dfdfdf;
+}
+
+.hover.hover-above {
+  border-top: 2px solid red;
+}
+
+.hover.hover-below {
+  border-bottom: 2px solid red;
+}
