@@ -92,7 +92,7 @@
 	  },
 
 	  handleAcceptTest: function handleAcceptTest(event) {
-	    // var isLink = event.dataTransfer.types.contains("text/uri-list");
+	    // var isLink = event.dataTransfer.types.contains("text/uri-list")
 	    return true;
 	  },
 

@@ -42,7 +42,7 @@ var ExampleSortableList = React.createClass({
   },
 
   handleAcceptTest(event) {
-    // var isLink = event.dataTransfer.types.contains("text/uri-list");
+    // var isLink = event.dataTransfer.types.contains("text/uri-list")
     return true
   },
 
@@ -61,7 +61,7 @@ var ExampleSortableList = React.createClass({
             </div>
           </li>
         </SortableItem>
-      );
+      )
     })
     return (
       <div>
@@ -69,7 +69,7 @@ var ExampleSortableList = React.createClass({
           {list}
         </ul>
       </div>
-    );
+    )
   }
 })
 
@@ -80,6 +80,6 @@ function update() {
       <ExampleSortableList />
     </div>,
     document.getElementById('examples')
-  );
+  )
 }
-update();
+update()
