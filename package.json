@@ -4,6 +4,7 @@
     "babel-loader": "^4.1.0",
     "lodash-node": "^3.5.0",
     "react": "^0.12.2",
+    "react-sortable-item": "0.0.1",
     "webpack": "^1.7.2"
   }
 }
