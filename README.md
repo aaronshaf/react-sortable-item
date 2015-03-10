@@ -15,6 +15,8 @@ npm install react-sortable-item
 ## Example
 
 ```javascript
+import SortableItem from 'react-sortable-item'
+
 var ExampleSortableList = React.createClass({
   handleDrop: function(dropPath, position, event) {},
 
