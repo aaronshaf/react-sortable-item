@@ -18,12 +18,12 @@ npm install react-sortable-item
 import SortableItem from 'react-sortable-item'
 
 var ExampleSortableList = React.createClass({
-  handleDrop: function(dropPath, position, event) {},
+  handleDrop(dropPath, position, event) {},
 
-  handleAcceptTest: function(event) {},
+  handleAcceptTest(event) {},
 
-  render: function() {
-    var list = yourRecords.map(function(record) {
+  render() {
+    var list = yourRecords.map((record) => {
       return (
         <SortableItem
             key={record.id}
@@ -38,7 +38,7 @@ var ExampleSortableList = React.createClass({
           </li>
         </SortableItem>
       )
-    }.bind(this))
+    })
     return (
       <ul>
         {list}
