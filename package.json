@@ -7,7 +7,8 @@
     "build": "babel index.es6.js --out-file index.es5.js"
   },
   "dependencies": {
-    "react": "^0.13.x "
+    "react": "^0.13.x",
+    "class-set": "0.0.4"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "react": "^0.13.x",
-    "classset": "0.0.1"
+    "react": "^0.13.x"
   },
   "devDependencies": {
     "babel": "^5.0.10",

@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import classset from 'classset'
+import classset from 'class-set'
 
 var itemBeingDragged
 

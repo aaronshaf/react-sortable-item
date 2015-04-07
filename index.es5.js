@@ -10,7 +10,7 @@ var _React = require('react/addons');
 
 var _React2 = _interopRequireWildcard(_React);
 
-var _classset = require('classset');
+var _classset = require('class-set');
 
 var _classset2 = _interopRequireWildcard(_classset);
 
