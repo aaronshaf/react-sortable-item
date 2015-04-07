@@ -1,5 +1,5 @@
 import React from 'react/addons'
-var cloneWithProps = React.addons.cloneWithProps
+import classset from 'classset'
 
 var itemBeingDragged
 
@@ -10,17 +10,17 @@ export default React.createClass({
       hover: false,
       isOverSelf: false,
       hoverAbove: false
-    };
+    }
   },
 
   handleDragStart(event) {
     event.dataTransfer.setData('text/plain', this.props.data)
-    itemBeingDragged = this.refs.item.getDOMNode()
+    itemBeingDragged = React.findDOMNode(this.refs.item)
     this.setState({dragging: true})
   },
 
   handleDragOver(event) {
-    var isOverSelf = this.refs.item.getDOMNode() === itemBeingDragged
+    var isOverSelf = React.findDOMNode(this.refs.item) === itemBeingDragged
     var isOverTopHalf = event.clientY < (event.target.offsetTop + (event.target.offsetHeight / 2))
 
     this.setState({
@@ -30,7 +30,7 @@ export default React.createClass({
     })
 
     if(isOverSelf) {
-      event.stopPropagation();
+      event.stopPropagation()
       return
     }
 
@@ -45,7 +45,7 @@ export default React.createClass({
   handleDragLeave(event) {
     this.setState({
       hover: false
-    });
+    })
     event.preventDefault()
   },
 
@@ -55,25 +55,24 @@ export default React.createClass({
 
     this.setState({
       hover: false
-    });
+    })
 
     if(this.state.isOverSelf) {
-      return;
+      return
     }
 
-    this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event);
+    this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event)
   },
 
   render() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classset({
       'dragging': this.state.dragging,
       'hover': this.state.hover,
       'hover-above': this.state.hoverAbove,
       'hover-below': !this.state.hoverAbove
-    });
+    })
 
-    return cloneWithProps(this.props.children, {
+    return React.cloneElement(this.props.children, {
       ref: "item",
       draggable: "true",
       className: classes,

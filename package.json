@@ -1,13 +1,13 @@
 {
   "name": "react-sortable-item",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Reorder elements in a list. Uses the native HTML5 Drag and Drop API.",
   "main": "index.es5.js",
   "scripts": {
-    "babel": "babel index.es6.js --out-file index.es5.js"
+    "build": "babel index.es6.js --out-file index.es5.js"
   },
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^0.13.x "
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,13 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "react": "^0.12.x || >=0.13.0-beta.1"
+    "react": "^0.13.x",
+    "classset": "0.0.1"
   },
   "devDependencies": {
-    "babel": "^4.7.4",
-    "babel-loader": "^4.1.0",
+    "babel": "^5.0.10",
+    "babel-core": "^5.0.10",
+    "babel-loader": "^5.0.0",
     "lodash-node": "^3.5.0",
     "webpack": "^1.7.2"
   },

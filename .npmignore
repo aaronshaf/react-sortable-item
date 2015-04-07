@@ -1,3 +1,4 @@
 example
 index.es6.js
 webpack.config.js
+.babelrc

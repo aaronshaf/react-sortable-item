@@ -1,15 +1,23 @@
-"use strict";
+'use strict';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-var React = _interopRequire(require("react/addons"));
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var cloneWithProps = React.addons.cloneWithProps;
+var _React = require('react/addons');
+
+var _React2 = _interopRequireWildcard(_React);
+
+var _classset = require('classset');
+
+var _classset2 = _interopRequireWildcard(_classset);
 
 var itemBeingDragged;
 
-module.exports = React.createClass({
-  displayName: "index.es6",
+exports['default'] = _React2['default'].createClass({
+  displayName: 'index.es6',
 
   getInitialState: function getInitialState() {
     return {
@@ -21,13 +29,13 @@ module.exports = React.createClass({
   },
 
   handleDragStart: function handleDragStart(event) {
-    event.dataTransfer.setData("text/plain", this.props.data);
-    itemBeingDragged = this.refs.item.getDOMNode();
+    event.dataTransfer.setData('text/plain', this.props.data);
+    itemBeingDragged = _React2['default'].findDOMNode(this.refs.item);
     this.setState({ dragging: true });
   },
 
   handleDragOver: function handleDragOver(event) {
-    var isOverSelf = this.refs.item.getDOMNode() === itemBeingDragged;
+    var isOverSelf = _React2['default'].findDOMNode(this.refs.item) === itemBeingDragged;
     var isOverTopHalf = event.clientY < event.target.offsetTop + event.target.offsetHeight / 2;
 
     this.setState({
@@ -73,18 +81,16 @@ module.exports = React.createClass({
   },
 
   render: function render() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = _classset2['default']({
       dragging: this.state.dragging,
       hover: this.state.hover,
-      "hover-above": this.state.hoverAbove,
-      "hover-below": !this.state.hoverAbove
+      'hover-above': this.state.hoverAbove,
+      'hover-below': !this.state.hoverAbove
     });
 
-    return cloneWithProps(this.props.children, {
-      // key=""
-      ref: "item",
-      draggable: "true",
+    return _React2['default'].cloneElement(this.props.children, {
+      ref: 'item',
+      draggable: 'true',
       className: classes,
       onDragStart: this.handleDragStart,
       onDragOver: this.handleDragOver,
@@ -95,3 +101,4 @@ module.exports = React.createClass({
     });
   }
 });
+module.exports = exports['default'];
