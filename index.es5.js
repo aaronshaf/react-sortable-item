@@ -10,9 +10,9 @@ var _React = require('react/addons');
 
 var _React2 = _interopRequireWildcard(_React);
 
-var _classset = require('class-set');
+var _classSet = require('class-set');
 
-var _classset2 = _interopRequireWildcard(_classset);
+var _classSet2 = _interopRequireWildcard(_classSet);
 
 var itemBeingDragged;
 
@@ -20,6 +20,7 @@ exports['default'] = _React2['default'].createClass({
   displayName: 'index.es6',
 
   propTypes: {
+    className: _React2['default'].PropTypes.string,
     handleAcceptTest: _React2['default'].PropTypes.func.isRequired,
     handleDrop: _React2['default'].PropTypes.func.isRequired,
     handleDragStart: _React2['default'].PropTypes.func,
@@ -103,7 +104,7 @@ exports['default'] = _React2['default'].createClass({
   },
 
   render: function render() {
-    var classes = _classset2['default']({
+    var classes = _classSet2['default'](this.props.className, {
       dragging: this.state.dragging,
       hover: this.state.hover,
       'hover-above': this.state.hoverAbove,

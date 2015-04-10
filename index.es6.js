@@ -1,10 +1,11 @@
 import React from 'react/addons'
-import classset from 'class-set'
+import classSet from 'class-set'
 
 var itemBeingDragged
 
 export default React.createClass({
   propTypes: {
+    className: React.PropTypes.string,
     handleAcceptTest: React.PropTypes.func.isRequired,
     handleDrop: React.PropTypes.func.isRequired,
     handleDragStart: React.PropTypes.func,
@@ -87,7 +88,7 @@ export default React.createClass({
   },
 
   render() {
-    var classes = classset({
+    var classes = classSet(this.props.className, {
       'dragging': this.state.dragging,
       'hover': this.state.hover,
       'hover-above': this.state.hoverAbove,
