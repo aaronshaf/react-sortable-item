@@ -19,6 +19,15 @@ var itemBeingDragged;
 exports['default'] = _React2['default'].createClass({
   displayName: 'index.es6',
 
+  propTypes: {
+    handleAcceptTest: _React2['default'].PropTypes.func.isRequired,
+    handleDrop: _React2['default'].PropTypes.func.isRequired,
+    handleDragStart: _React2['default'].PropTypes.func,
+    handleDragOver: _React2['default'].PropTypes.func,
+    handleDragEnd: _React2['default'].PropTypes.func,
+    handleDragLeave: _React2['default'].PropTypes.func
+  },
+
   getInitialState: function getInitialState() {
     return {
       dragging: false,
@@ -32,6 +41,9 @@ exports['default'] = _React2['default'].createClass({
     event.dataTransfer.setData('text/plain', this.props.data);
     itemBeingDragged = _React2['default'].findDOMNode(this.refs.item);
     this.setState({ dragging: true });
+    if (this.props.handleDragStart) {
+      this.props.handleDragStart(event);
+    }
   },
 
   handleDragOver: function handleDragOver(event) {
@@ -52,10 +64,17 @@ exports['default'] = _React2['default'].createClass({
     if (!this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) {
       return;
     }event.preventDefault();
+
+    if (this.props.handleDragOver) {
+      this.props.handleDragOver(event);
+    }
   },
 
   handleDragEnd: function handleDragEnd(event) {
     this.setState({ dragging: false });
+    if (this.props.handleDragEnd) {
+      this.props.handleDragEnd(event);
+    }
   },
 
   handleDragLeave: function handleDragLeave(event) {
@@ -63,6 +82,9 @@ exports['default'] = _React2['default'].createClass({
       hover: false
     });
     event.preventDefault();
+    if (this.props.handleDragLeave) {
+      this.props.handleDragLeave(event);
+    }
   },
 
   handleDrop: function handleDrop(event) {

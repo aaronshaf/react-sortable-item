@@ -4,6 +4,15 @@ import classset from 'class-set'
 var itemBeingDragged
 
 export default React.createClass({
+  propTypes: {
+    handleAcceptTest: React.PropTypes.func.isRequired,
+    handleDrop: React.PropTypes.func.isRequired,
+    handleDragStart: React.PropTypes.func,
+    handleDragOver: React.PropTypes.func,
+    handleDragEnd: React.PropTypes.func,
+    handleDragLeave: React.PropTypes.func
+  },
+
   getInitialState() {
     return {
       dragging: false,
@@ -17,6 +26,9 @@ export default React.createClass({
     event.dataTransfer.setData('text/plain', this.props.data)
     itemBeingDragged = React.findDOMNode(this.refs.item)
     this.setState({dragging: true})
+    if(this.props.handleDragStart) {
+      this.props.handleDragStart(event)
+    }
   },
 
   handleDragOver(event) {
@@ -36,10 +48,17 @@ export default React.createClass({
 
     if(!this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) return
     event.preventDefault()
+
+    if(this.props.handleDragOver) {
+      this.props.handleDragOver(event)
+    }
   },
 
   handleDragEnd(event) {
     this.setState({dragging: false})
+    if(this.props.handleDragEnd) {
+      this.props.handleDragEnd(event)
+    }
   },
 
   handleDragLeave(event) {
@@ -47,6 +66,9 @@ export default React.createClass({
       hover: false
     })
     event.preventDefault()
+    if(this.props.handleDragLeave) {
+      this.props.handleDragLeave(event)
+    }
   },
 
   handleDrop(event) {
