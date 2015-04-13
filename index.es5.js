@@ -21,8 +21,10 @@ exports['default'] = _React2['default'].createClass({
 
   propTypes: {
     className: _React2['default'].PropTypes.string,
-    handleAcceptTest: _React2['default'].PropTypes.func.isRequired,
-    handleDrop: _React2['default'].PropTypes.func.isRequired,
+    type: _React2['default'].PropTypes.string,
+    data: _React2['default'].PropTypes.any,
+    handleAcceptTest: _React2['default'].PropTypes.func,
+    handleDrop: _React2['default'].PropTypes.func,
     handleDragStart: _React2['default'].PropTypes.func,
     handleDragOver: _React2['default'].PropTypes.func,
     handleDragEnd: _React2['default'].PropTypes.func,
@@ -39,7 +41,7 @@ exports['default'] = _React2['default'].createClass({
   },
 
   handleDragStart: function handleDragStart(event) {
-    event.dataTransfer.setData('text/plain', this.props.data);
+    event.dataTransfer.setData(this.props.type || 'text/plain', this.props.data);
     itemBeingDragged = _React2['default'].findDOMNode(this.refs.item);
     this.setState({ dragging: true });
     if (this.props.handleDragStart) {
@@ -51,21 +53,21 @@ exports['default'] = _React2['default'].createClass({
     var isOverSelf = _React2['default'].findDOMNode(this.refs.item) === itemBeingDragged;
     var isOverTopHalf = event.clientY < event.target.offsetTop + event.target.offsetHeight / 2;
 
-    this.setState({
-      hover: true,
-      isOverSelf: isOverSelf,
-      hoverAbove: isOverTopHalf
-    });
-
     if (isOverSelf) {
       event.stopPropagation();
       return;
     }
 
-    if (!this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) {
+    if (this.props.handleAcceptTest && !this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) {
       return;
-    }event.preventDefault();
+    }
 
+    this.setState({
+      hover: true,
+      isOverSelf: isOverSelf,
+      hoverAbove: isOverTopHalf
+    });
+    event.preventDefault();
     if (this.props.handleDragOver) {
       this.props.handleDragOver(event);
     }
@@ -100,7 +102,9 @@ exports['default'] = _React2['default'].createClass({
       return;
     }
 
-    this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event);
+    if (this.props.handleDrop) {
+      this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event);
+    }
   },
 
   render: function render() {

@@ -6,8 +6,10 @@ var itemBeingDragged
 export default React.createClass({
   propTypes: {
     className: React.PropTypes.string,
-    handleAcceptTest: React.PropTypes.func.isRequired,
-    handleDrop: React.PropTypes.func.isRequired,
+    type: React.PropTypes.string,
+    data: React.PropTypes.any,
+    handleAcceptTest: React.PropTypes.func,
+    handleDrop: React.PropTypes.func,
     handleDragStart: React.PropTypes.func,
     handleDragOver: React.PropTypes.func,
     handleDragEnd: React.PropTypes.func,
@@ -24,7 +26,7 @@ export default React.createClass({
   },
 
   handleDragStart(event) {
-    event.dataTransfer.setData('text/plain', this.props.data)
+    event.dataTransfer.setData(this.props.type || 'text/plain', this.props.data)
     itemBeingDragged = React.findDOMNode(this.refs.item)
     this.setState({dragging: true})
     if(this.props.handleDragStart) {
@@ -36,20 +38,21 @@ export default React.createClass({
     var isOverSelf = React.findDOMNode(this.refs.item) === itemBeingDragged
     var isOverTopHalf = event.clientY < (event.target.offsetTop + (event.target.offsetHeight / 2))
 
-    this.setState({
-      hover: true,
-      isOverSelf: isOverSelf,
-      hoverAbove: isOverTopHalf
-    })
-
     if(isOverSelf) {
       event.stopPropagation()
       return
     }
 
-    if(!this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) return
-    event.preventDefault()
+    if(this.props.handleAcceptTest && !this.props.handleAcceptTest(this.props.data, isOverTopHalf ? 0 : 1, event)) {
+      return
+    }
 
+    this.setState({
+      hover: true,
+      isOverSelf: isOverSelf,
+      hoverAbove: isOverTopHalf
+    })
+    event.preventDefault()
     if(this.props.handleDragOver) {
       this.props.handleDragOver(event)
     }
@@ -84,7 +87,9 @@ export default React.createClass({
       return
     }
 
-    this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event)
+    if(this.props.handleDrop) {
+      this.props.handleDrop(this.props.data, this.state.hoverAbove ? 0 : 1, event)
+    }
   },
 
   render() {
